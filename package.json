@@ -1,0 +1,49 @@
+{
+  "name": "now-playing",
+  "description": "A visual widget showing the currently playing track from Libre.fm",
+  "author": "Alexandre Breteau <contact@seldszar.fr>",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://github.com/seldszar/now-playing#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seldszar/now-playing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/seldszar/now-playing/issues"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "foundation-sites": "^6.4.3",
+    "gsap": "^2.0.1",
+    "jsonp": "^0.2.1",
+    "lodash": "^4.17.5",
+    "vue": "^2.5.17",
+    "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0",
+    "@vue/cli-plugin-eslint": "^3.0.0",
+    "@vue/cli-service": "^3.0.0",
+    "@vue/eslint-config-prettier": "^3.0.0",
+    "lint-staged": "^7.2.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^6.0.7",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint"
+    ],
+    "*.vue": [
+      "vue-cli-service lint"
+    ]
+  }
+}
