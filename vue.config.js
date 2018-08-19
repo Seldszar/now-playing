@@ -1,3 +1,4 @@
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 const path = require("path");
 
 const includePaths = [
@@ -18,5 +19,12 @@ module.exports = {
         `
       }
     }
+  },
+  chainWebpack(config) {
+    config.plugin("lodash").use(LodashModuleReplacementPlugin, [
+      {
+        paths: true
+      }
+    ]);
   }
 };
