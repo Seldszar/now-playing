@@ -21,7 +21,6 @@ export default {
     };
   },
   mounted() {
-    setInterval(() => this.refresh(), 10000);
     this.refresh();
   },
   methods: {
@@ -29,8 +28,10 @@ export default {
       jsonp(
         `https://libre.fm/2.0/?method=user.getrecenttracks&user=${
           settings.user
-        }&limit=2&format=json`,
+        }&limit=1&format=json`,
         (error, data) => {
+          setTimeout(() => this.refresh(), 10000);
+
           if (error) {
             return;
           }
