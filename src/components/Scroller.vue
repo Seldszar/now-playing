@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { TimelineMax, Linear } from "gsap";
+import { easing, styler, timeline } from "popmotion";
 
 export default {
   mounted() {
@@ -18,27 +18,29 @@ export default {
   },
   methods: {
     tween() {
-      if (this.timeline) {
-        this.timeline.kill();
+      if (this.animation) {
+        this.animation.stop();
       }
 
-      const { content } = this.$refs;
-      const endValue = Math.max(0, content.clientWidth - this.$el.clientWidth);
-      const duration = endValue * 0.015;
-      const x = -endValue;
+      const $content = this.$refs.content;
+      const endValue = Math.max(0, $content.clientWidth - this.$el.clientWidth);
+      const duration = endValue * 15;
+      const styled = styler($content);
 
-      const timeline = new TimelineMax({
-        paused: !duration,
-        repeat: -1
-      });
+      const playlist = [
+        "+2000",
+        { track: "x", from: 0, to: -endValue, duration, ease: easing.linear },
+        "+2000",
+        { track: "x", to: 0 }
+      ];
 
-      timeline.set(content, { x: 0, opacity: 1 });
-      timeline.to(content, duration, { ease: Linear.easeNone, x }, "+=2");
-      timeline.to(content, 0.25, { opacity: 0 }, "+=2");
-      timeline.set(content, { x: 0 });
-      timeline.to(content, 0.25, { opacity: 1 });
+      styled.set({ x: 0, opacity: 1 });
 
-      this.timeline = timeline;
+      if (duration > 0) {
+        this.animation = timeline(playlist, { loop: Infinity }).start(
+          styled.set
+        );
+      }
     }
   }
 };
